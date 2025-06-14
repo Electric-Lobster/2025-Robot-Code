@@ -40,8 +40,10 @@ public class DefaultDrive extends Command {
   public void execute() {
 
     // this calls the function from the drivetrain to set the speed of the motors
-    double foward = -driver.getLeftY() * DriveSpeed;
-    double turn = -driver.getRightX() * DriveSpeed * 1.5;
+    double mult = (-operator.getRawAxis(3) + 1.0) / 2.0;
+    mult = (mult + 0.5) / 1.5;
+    double foward = -driver.getLeftY() * DriveSpeed * mult;
+    double turn = -driver.getRightX() * DriveSpeed * 1.5 * mult;
     drivetrain.ArcadeDrive(foward, turn);
   }
 
